@@ -1,0 +1,43 @@
+.revealBase {
+  will-change: transform, opacity, filter;
+  transition-property: transform, opacity, filter;
+  transition-duration: 0.8s;
+  transition-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Animations */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in {
+  opacity: 0;
+}
+.fade-in.visible {
+  opacity: 1;
+}
+
+.blur-in {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(20px);
+}
+.blur-in.visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+.scale-in {
+  opacity: 0;
+  transform: scale(0.95);
+}
+.scale-in.visible {
+  opacity: 1;
+  transform: scale(1);
+}

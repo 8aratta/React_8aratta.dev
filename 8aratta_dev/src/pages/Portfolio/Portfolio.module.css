@@ -1,0 +1,507 @@
+/* Small mobile styles */
+@media (max-width: 480px) {
+  .heroPhoto {
+    width: 100px;
+    height: 100px;
+    object-position: center 0%;
+  }
+
+  .heroText {
+    align-items: center;
+    padding-top: 1rem;
+  }
+}
+.portfolioPage {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: #0a0a0a;
+  color: #e0e0e0;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+.portfolioPage[data-theme="light"] {
+  background: #e8e8e8;
+  color: #1a1a1a;
+}
+
+.content {
+  width: min(1080px, 92vw);
+  margin: 0 auto;
+  padding: 7rem 0 5rem;
+}
+
+.heroPhotoWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.section {
+  padding: 4rem 0;
+  border-bottom: 1px solid #ffffff14;
+}
+
+.portfolioPage[data-theme="light"] .section {
+  border-bottom-color: #1a1a1a20;
+}
+
+.section h2 {
+  margin: 0 0 1.2rem;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  letter-spacing: 0.02em;
+}
+
+.section p {
+  margin: 0;
+  line-height: 1.7;
+}
+
+.heroSection {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2rem;
+  align-items: center;
+  padding-top: 1rem;
+  min-height: 70vh; /* Make hero section taller for better initial view */
+  border-bottom: none; /* Removed border to blend with scrollytelling area */
+}
+
+/* Scrollytelling Layout Base */
+.scrollytellingLayout {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: relative;
+  margin-top: 4rem;
+}
+
+@media (min-width: 900px) {
+  .scrollytellingLayout {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .sidebar {
+    position: relative; /* Changed from sticky, TOC is now fixed on its own */
+    /* Acts as a flexible spacer on the left side to push content right */
+    flex: 0 0 250px;
+    padding-right: 2rem;
+    transition: flex-basis 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .sidebarCollapsed {
+    flex: 0 0 80px; /* Shrinks the spacer, allowing narrativeContent to grow */
+  }
+
+  .narrativeContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    /* Extra padding to allow for scrolling past the last element smoothly */
+    padding-bottom: 20vh;
+    min-width: 0; /* Prevents flex children from blowing out container width */
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .heroSection {
+    padding-left: 250px; /* matches expanded sidebar/TOC width */
+    transition: padding-left 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .heroSectionCollapsed {
+    padding-left: 80px; /* matches collapsed sidebar width */
+  }
+}
+
+.narrativeSection {
+  padding: 6rem 0;
+  border-bottom: 1px solid #ffffff14;
+  scroll-margin-top: 4rem; /* For offset when clicking TOC */
+}
+
+.narrativeSection:last-child {
+  border-bottom: none;
+}
+
+.portfolioPage[data-theme="light"] .narrativeSection {
+  border-bottom-color: #1a1a1a20;
+}
+
+
+/* --- End Layout structural changes --- */
+/* Rest of the original styling below */
+
+.heroPhoto {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 1px solid #ffffff2a;
+  object-fit: cover;
+  object-position: center -10%;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.heroPhoto::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12); /* subtle overlay, adjust for theme */
+  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.12);
+  pointer-events: none;
+}
+
+.heroPhoto:hover {
+  transform: scale(1.05) rotate(-2deg);
+}
+
+
+.portfolioPage[data-theme="light"] .heroPhoto {
+  border-color: #1a1a1a2a;
+}
+
+.heroText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.sectionLabel {
+  margin: 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #a0a0a0;
+}
+
+.heroName {
+  margin: 0;
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  line-height: 1.05;
+}
+
+.heroTitle {
+  margin: 0;
+  font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+  color: #b7b7b7;
+}
+
+.portfolioPage[data-theme="light"] .heroTitle {
+  color: #4a4a4a;
+}
+
+.heroSummary {
+  max-width: 70ch;
+  color: #d0d0d0;
+  font-size: 1.1rem;
+}
+
+.portfolioPage[data-theme="light"] .heroSummary {
+  color: #333333;
+}
+
+.linkRow,
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 0.5rem;
+}
+
+.linkRow a,
+.inlineLink,
+.cleanList a,
+.section a {
+  color: inherit;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.inlineLink:hover,
+.cleanList a:hover,
+.section a:hover {
+  color: #ffffff;
+}
+
+.portfolioPage[data-theme="light"] .inlineLink:hover,
+.portfolioPage[data-theme="light"] .cleanList a:hover,
+.portfolioPage[data-theme="light"] .section a:hover {
+  color: #000000;
+}
+
+.linkRow a {
+  border: 1px solid #ffffff26;
+  padding: 0.4rem 0.8rem;
+  text-decoration: none;
+  border-radius: 4px; /* Slight rounding for modern feel */
+}
+
+.linkRow a:hover {
+  border-color: #ffffff60;
+  background-color: #ffffff0a;
+}
+
+.portfolioPage[data-theme="light"] .linkRow a {
+  border-color: #1a1a1a2a;
+}
+
+.portfolioPage[data-theme="light"] .linkRow a:hover {
+  border-color: #1a1a1a60;
+  background-color: #1a1a1a0a;
+}
+
+.ctaPrimary,
+.ctaSecondary {
+  padding: 0.55rem 0.95rem;
+  text-decoration: none;
+  border: 1px solid #ffffff2c;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.ctaPrimary {
+  background: #ffffff14;
+}
+
+.ctaPrimary:hover {
+  background: #ffffff2a;
+  transform: translateY(-2px);
+}
+
+.ctaSecondary {
+  background: transparent;
+}
+
+.ctaSecondary:hover {
+  border-color: #ffffff60;
+  transform: translateY(-2px);
+}
+
+.portfolioPage[data-theme="light"] .ctaPrimary,
+.portfolioPage[data-theme="light"] .ctaSecondary {
+  border-color: #1a1a1a2c;
+}
+
+.portfolioPage[data-theme="light"] .ctaPrimary {
+  background: #ffffffa0;
+}
+
+.portfolioPage[data-theme="light"] .ctaPrimary:hover {
+  background: #e0e0e0;
+}
+
+.portfolioPage[data-theme="light"] .ctaSecondary:hover {
+  border-color: #1a1a1a60;
+}
+
+.leadText {
+  max-width: 74ch;
+  font-size: 1.05rem;
+  color: #dcdcdc;
+}
+
+.portfolioPage[data-theme="light"] .leadText {
+  color: #2a2a2a;
+}
+
+.skillGridContainer {
+  width: 100%;
+  max-width: 1000px; /* Optional cap */
+  margin: 0 auto;
+}
+
+.sectionIntro {
+  margin-bottom: 2rem !important; /* increased space */
+  color: #b7b7b7;
+  font-size: 1.05rem;
+}
+
+.portfolioPage[data-theme="light"] .sectionIntro {
+  color: #4e4e4e;
+}
+
+.projectList {
+  display: grid;
+  gap: 2rem; /* Increased gap for the cards */
+}
+
+.placeholderNote {
+  margin-top: 1.5rem !important;
+  font-size: 0.95rem;
+  color: #999999;
+  font-style: italic;
+}
+
+.portfolioPage[data-theme="light"] .placeholderNote {
+  color: #666666;
+}
+
+.projectCard {
+  border: 1px solid #ffffff1f;
+  background: #ffffff08;
+  padding: 1.5rem;
+  border-radius: 8px;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.projectCard:hover {
+  transform: translateY(-8px);
+  border-color: #ffffff40;
+  box-shadow: 0 15px 40px -15px rgba(0, 0, 0, 0.6);
+}
+
+.portfolioPage[data-theme="light"] .projectCard {
+  border-color: #1a1a1a24;
+  background: #ffffff96;
+}
+
+.portfolioPage[data-theme="light"] .projectCard:hover {
+  border-color: #1a1a1a40;
+  box-shadow: 0 15px 40px -15px rgba(0, 0, 0, 0.1);
+}
+
+.projectCard h3 {
+  margin: 0 0 1rem;
+  font-size: 1.4rem;
+  color: #f0f0f0;
+}
+
+.portfolioPage[data-theme="light"] .projectCard h3 {
+  color: #111111;
+}
+
+.projectCard p {
+  margin: 0 0 0.85rem;
+  line-height: 1.6;
+  color: #cccccc;
+}
+
+.portfolioPage[data-theme="light"] .projectCard p {
+  color: #333333;
+}
+
+.projectImagePlaceholder {
+  margin: 0 0 1.25rem;
+  border: 1px dashed #ffffff36;
+  min-height: 180px; /* Taller placeholder */
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  color: #b5b5b5;
+  font-size: 0.95rem;
+  background: #ffffff03;
+  transition: background 0.3s ease;
+}
+
+.projectCard:hover .projectImagePlaceholder {
+  background: #ffffff0a;
+}
+
+.portfolioPage[data-theme="light"] .projectImagePlaceholder {
+  border-color: #1a1a1a40;
+  color: #666666;
+  background: #00000003;
+}
+
+.portfolioPage[data-theme="light"] .projectCard:hover .projectImagePlaceholder {
+  background: #0000000a;
+}
+
+.meta {
+  color: #c7c7c7 !important;
+  font-size: 0.95rem;
+}
+
+.portfolioPage[data-theme="light"] .meta {
+  color: #444444 !important;
+}
+
+.timelineItem {
+  border: 1px solid #ffffff1f;
+  background: #ffffff08;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #ffffff40; /* Add a subtle timeline accent */
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.timelineItem:hover {
+  transform: translateX(5px);
+  border-left-color: #ffffff;
+}
+
+.portfolioPage[data-theme="light"] .timelineItem {
+  border-color: #1a1a1a24;
+  background: #ffffff96;
+  border-left-color: #1a1a1a40;
+}
+
+.portfolioPage[data-theme="light"] .timelineItem:hover {
+  border-left-color: #1a1a1a;
+}
+
+.timelineItem h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: #ffffff;
+}
+
+.portfolioPage[data-theme="light"] .timelineItem h3 {
+  color: #111111;
+}
+
+.dateRange {
+  margin: 0.4rem 0 1rem !important;
+  color: #a0a0a0 !important;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.portfolioPage[data-theme="light"] .dateRange {
+  color: #666666 !important;
+}
+
+.timelineItem ul,
+.cleanList {
+  margin: 0;
+  padding-left: 1.2rem;
+  line-height: 1.7;
+  color: #dcdcdc;
+}
+
+.portfolioPage[data-theme="light"] .timelineItem ul,
+.portfolioPage[data-theme="light"] .cleanList {
+  color: #2a2a2a;
+}
+
+@media (max-width: 900px) {
+  .heroSection {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    min-height: auto;
+    padding-top: 3rem;
+  }
+
+  .heroPhoto {
+    width: 140px;
+    height: 140px;
+  }
+
+  .heroText {
+    align-items: center;
+  }
+
+  .linkRow, .ctaRow {
+    justify-content: center;
+  }
+
+  .skillGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,159 @@
+.demoWindow {
+  /* --- Scoped CSS variables (light defaults) --- */
+  --surface: #ffffff;
+  --surface-secondary: rgba(0, 0, 0, 0.03);
+  --background: #f7f7f7;
+  --border: #e0e0e0;
+  --text-primary: #111111;
+  --text-secondary: #666666;
+  --input-bg: #ffffff;
+  --input-text: #222222;
+  --input-border: #cccccc;
+  --code-bg: #f7f7f7;
+  --code-text: #222222;
+
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text-primary);
+  /* Premium macOS shadow */
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.05);
+  margin-top: 1.5rem;
+  overflow: hidden; /* Ensure border-radius clips children */
+  display: flex;
+  flex-direction: column;
+}
+
+.demoWindow[data-theme="dark"] {
+  --surface: #222222;
+  --surface-secondary: rgba(255, 255, 255, 0.05);
+  --background: #1a1a1a;
+  --border: #333333;
+  --text-primary: #ffffff;
+  --text-secondary: #aaaaaa;
+  --input-bg: #222222;
+  --input-text: #ffffff;
+  --input-border: #444444;
+  --code-bg: #181818;
+  --code-text: #d4d4d4;
+}
+
+/* --- Window Header (macOS style) --- */
+.windowHeader {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: var(--background);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+
+/* --- Segmented Control Tabs --- */
+.tabRow {
+  flex: 1;
+  display: flex;
+  width: 100%;
+}
+
+.segmentedControl {
+  display: flex;
+  background: #0000000d;
+  border-radius: 8px;
+  padding: 0.25rem;
+  width: 100%;
+}
+
+.demoWindow[data-theme="dark"] .segmentedControl {
+  background: #ffffff1a;
+}
+
+.segmentedControl button {
+  background: transparent;
+  border: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.4rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+  flex: 1;
+}
+
+.segmentedControl button:hover {
+  color: var(--text-primary);
+}
+
+.segmentedControl .activeTab {
+  background: var(--surface);
+  color: var(--text-primary);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.demoWindow[data-theme="dark"] .segmentedControl .activeTab {
+  background: #333;
+}
+
+/* --- Content Area --- */
+.tabContent {
+  min-height: 280px;
+  display: flex;
+  flex-direction: row;
+  background: var(--surface);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Code/Style tabs get their own padding */
+.tabContent > .codeBlock {
+  flex: 1;
+}
+
+/* --- Premium Code Editor --- */
+.codeBlock {
+  margin: 0;
+  background: var(--code-bg, #1e1e1e);
+  color: var(--code-text, #d4d4d4);
+  padding: 1.5rem;
+  font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  overflow-x: auto;
+  flex: 1;
+}
+
+/* Custom Scrollbar for Code Block */
+.codeBlock::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+.codeBlock::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+.codeBlock::-webkit-scrollbar-thumb {
+  background: #424242;
+  border-radius: 4px;
+}
+
+.codeBlock::-webkit-scrollbar-thumb:hover {
+  background: #4f4f4f;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  /* .windowControls styles removed */
+  .windowHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .tabRow {
+    justify-content: flex-start;
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 0.5rem; /* Room for scrollbar */
+  }
+}

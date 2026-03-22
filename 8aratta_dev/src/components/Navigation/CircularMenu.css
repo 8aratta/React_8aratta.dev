@@ -1,0 +1,181 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   Liquid glass styling for @8aratta/circular-menu
+   Targets the package's attribute selectors and BEM classes.
+───────────────────────────────────────────────────────────────────────────── */
+
+/* ─── Toggle Button ─── */
+[data-circular-menu-toggle] {
+    position: relative;
+    z-index: 120;
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+/* ─── Icons ─── */
+[data-circular-menu-icon] {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+[data-circular-menu-icon] img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    user-select: none;
+    pointer-events: none;
+    -webkit-user-drag: none;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-circular-menu-toggle]:hover [data-circular-menu-icon] img {
+    transform: scale(1.12);
+}
+
+/* ─── Mobile ─── */
+@media (max-width: 768px) {
+    [data-circular-menu-toggle] {
+        width: 40px;
+        height: 40px;
+    }
+
+    [data-circular-menu-icon] img {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+/* ─── Menu Items — base visual (liquid glass) ─── */
+.circular-menu-item {
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    isolation: isolate;
+}
+
+/* Liquid glass refraction layer (behind text) */
+.circular-menu-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    border-radius: inherit;
+    backdrop-filter: url(#liquid-glass-pill);
+    -webkit-backdrop-filter: url(#liquid-glass-pill);
+    isolation: isolate;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Inner shadow + tint overlay */
+.circular-menu-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background-color: rgba(255, 255, 255, 0.06);
+    box-shadow: inset 0 0 20px -5px rgba(255, 255, 255, 0.45);
+    pointer-events: none;
+    user-select: none;
+}
+
+/* ─── Light theme ─── */
+[data-circular-menu][data-theme="light"] .circular-menu-item {
+    color: #000;
+}
+
+[data-circular-menu][data-theme="light"] .circular-menu-item::before {
+    background-color: rgba(255, 255, 255, 0.45);
+    box-shadow:
+        inset 0 0 20px -5px rgba(255, 255, 255, 0.85),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* ─── Hover — dark mode ─── */
+.circular-menu-item--open:hover::before {
+    background-color: rgba(255, 255, 255, 0.18);
+    box-shadow:
+        inset 0 0 24px -4px rgba(255, 255, 255, 0.7),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5),
+        0 0 16px -4px rgba(255, 255, 255, 0.25);
+    transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* ─── Hover — light mode ─── */
+[data-circular-menu][data-theme="light"] .circular-menu-item--open:hover::before {
+    background-color: rgba(0, 0, 0, 0.08);
+    box-shadow:
+        inset 0 0 20px -5px rgba(255, 255, 255, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.7),
+        0 2px 12px -2px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* ─── Mobile font sizes ─── */
+@media (max-width: 768px) {
+    .circular-menu-item {
+        font-size: 0.82rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .circular-menu-item {
+        font-size: 0.75rem;
+    }
+}
+
+/* ─── Idle hint animation ─── */
+@keyframes idleTwitch {
+    0%,
+    75% {
+        rotate: 0deg;
+        scale: 1;
+    }
+
+    79% {
+        rotate: -14deg;
+        scale: 1.07;
+    }
+
+    84% {
+        rotate: 9deg;
+        scale: 0.96;
+    }
+
+    88% {
+        rotate: -5deg;
+        scale: 1.03;
+    }
+
+    91% {
+        rotate: 2deg;
+        scale: 0.99;
+    }
+
+    94% {
+        rotate: 0deg;
+        scale: 1;
+    }
+
+    100% {
+        rotate: 0deg;
+        scale: 1;
+    }
+}
+
+.circular-menu-item--idle-hint {
+    animation: idleTwitch 8s ease-in-out infinite;
+    animation-delay: 1s;
+}

@@ -1,0 +1,28 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Opera GX (Debug)",
+            "type": "chrome",
+            "request": "launch",
+            "runtimeExecutable": "C:\\Program Files\\Opera GX\\opera.exe",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}/8aratta_dev/src",
+            "sourceMapPathOverrides": {
+                "webpack:///src/*": "${webRoot}/*"
+            },
+            "preLaunchTask": "Start Dev Server"
+        },
+        {
+            "name": "Attach to Opera GX",
+            "type": "chrome",
+            "request": "attach",
+            "port": 9222,
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}/8aratta_dev/src",
+            "sourceMapPathOverrides": {
+                "webpack:///src/*": "${webRoot}/*"
+            }
+        }
+    ]
+}

@@ -1,0 +1,140 @@
+
+.projectsPage {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: #0a0a0a;
+  color: #e0e0e0;
+  transition: background 0.4s ease, color 0.4s ease;
+  padding-bottom: 5rem;
+}
+
+.projectsPage[data-theme="light"] {
+  background: #e8e8e8;
+  color: #1a1a1a;
+}
+
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+}
+
+.heroSection {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.heroTitle {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.heroSummary {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.projectList {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem; /* Increased breathing room */
+}
+
+/* Glassmorphism Card */
+.projectSection {
+  /* Dynamic transparent surface based on theme (assuming dark mode primary) */
+  background: #ffffff0d;
+  border: 1px solid #ffffff1a;
+  border-radius: 24px;
+  padding: 2.5rem;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+:global([data-theme="light"]) .projectSection {
+  background: #ffffffb3; /* 70% opacity white */
+  border: 1px solid #0000001a;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+}
+
+.projectSection:hover {
+  transform: translateY(-4px);
+  border-color: #ffffff33;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.2);
+}
+
+:global([data-theme="light"]) .projectSection:hover {
+  border-color: #00000033;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.08);
+}
+
+.projectHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Space out title and link */
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.projectHeader h2 {
+  font-size: 1.75rem;
+  margin: 0;
+  font-weight: 700;
+}
+
+/* Premium Button Look */
+
+.npmLink {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--button-text, #fff);
+  background-color: var(--button-bg, #222);
+  text-decoration: none;
+  padding: 0.5rem 1.25rem;
+  border-radius: 30px; /* Pill shape */
+  transition: all 0.2s ease;
+  display: inline-block;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+:global([data-theme="light"]) .npmLink {
+  color: #222;
+  background-color: #fff;
+}
+
+.npmLink:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.projectDescription {
+  margin: 0 0 2rem 0;
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  max-width: 80%; /* Readability measure */
+}
+
+@media (max-width: 600px) {
+  .projectSection {
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+  .projectHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .projectDescription {
+    max-width: 100%;
+  }
+}

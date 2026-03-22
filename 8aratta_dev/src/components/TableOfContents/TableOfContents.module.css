@@ -1,0 +1,245 @@
+.proximityZone {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 5rem;
+  height: 100vh;
+  z-index: 49;
+  pointer-events: auto;
+}
+
+.toc {
+  position: fixed;
+  top: 50%;
+  left: 0; /* Attach to left edge */
+  transform: translateY(-50%) translateX(0); /* Default expanded state */
+  padding: 1.5rem;
+  z-index: 50;
+  display: flex;
+  align-items: center; /* Center toggle button vertically */
+  gap: 1.5rem;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  /* Optional: subtle background for contrast when sliding out of frame */
+  /* background: linear-gradient(to right, rgba(10,10,10,0.8) 0%, rgba(10,10,10,0) 100%); */
+}
+
+/* Collapsed state: Slide out of frame entirely, leaving only button visible */
+/* 36px button + 1.5rem padding + extra 10px buffer from edge = ~70px */
+.toc.collapsed {
+  transform: translateY(-50%) translateX(calc(-100% + 70px));
+}
+
+/* Proximity peek effect */
+.toc.collapsed[data-proximity="true"] {
+  transform: translateY(-50%) translateX(calc(-100% + 80px));
+}
+
+.toggleButton {
+  background: transparent;
+  border: 1px solid #ffffff1a;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  margin-top: -0.3rem; /* visually align with first item */
+  /* When collapsed, we want the button to look clickable */
+  pointer-events: auto; 
+}
+
+.toggleButton:hover {
+  background: #ffffff0d;
+  color: #e0e0e0;
+  border-color: #ffffff40;
+}
+
+:global([data-theme="light"]) .toggleButton {
+  border-color: #1a1a1a1a;
+  color: #666;
+}
+
+:global([data-theme="light"]) .toggleButton:hover {
+  background: #1a1a1a0d;
+  color: #1a1a1a;
+  border-color: #1a1a1a40;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+}
+
+.tocContent {
+  overflow: hidden;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+}
+
+.collapsed .tocContent {
+  opacity: 0;
+  pointer-events: none; /* prevent clicks when invisible */
+}
+
+.tocList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  border-left: 1px solid #ffffff1a;
+}
+
+/* Light theme support */
+:global([data-theme="light"]) .tocList {
+  border-left-color: #1a1a1a1a;
+}
+
+.tocItem {
+  margin: 0;
+  white-space: nowrap; /* Prevent text wrapping during animation */
+}
+
+.tocLink {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.2rem 0;
+  color: #888;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+  position: relative;
+  left: -1px; /* Align with border */
+  /* Reveal animation on initial load */
+  animation: slideInRight 0.5s ease forwards;
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+:global([data-theme="light"]) .tocLink {
+  color: #888;
+}
+
+.indicator {
+  width: 2px;
+  height: 100%;
+  min-height: 1.2rem;
+  background-color: transparent;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.linkLabel {
+  transition: opacity 0.3s ease;
+}
+
+.tocLink:hover,
+.tocLink.active {
+  color: #e0e0e0;
+  transform: translateX(4px);
+}
+
+:global([data-theme="light"]) .tocLink:hover,
+:global([data-theme="light"]) .tocLink.active {
+  color: #1a1a1a;
+}
+
+.tocLink.active .indicator {
+  background-color: #e0e0e0;
+}
+
+:global([data-theme="light"]) .tocLink.active .indicator {
+  background-color: #1a1a1a;
+}
+
+@keyframes slideInRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* On smaller screens, make it horizontal or hide */
+@media (max-width: 900px) {
+  .proximityZone {
+    display: none;
+  }
+
+  .toc {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+    margin-bottom: 3rem;
+    padding: 0;
+    background: transparent;
+    border: none;
+    flex-direction: column;
+  }
+
+  .toc.collapsed {
+    transform: none;
+  }
+  
+  .toggleButton {
+    display: none; /* Hide toggle on mobile, just show contents */
+  }
+
+  .tocContent {
+    max-width: 100%;
+    overflow: visible;
+  }
+
+  .collapsed .tocContent {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .tocList {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    border-left: none;
+    border-bottom: 1px solid #ffffff1a;
+    padding-bottom: 1rem;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  :global([data-theme="light"]) .tocList {
+    border-bottom-color: #1a1a1a1a;
+  }
+  
+  .tocLink {
+    left: 0;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .indicator {
+    display: none;
+  }
+  
+  .tocLink.active {
+    position: relative;
+  }
+  
+  .tocLink.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1rem;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #e0e0e0;
+  }
+  
+  :global([data-theme="light"]) .tocLink.active::after {
+    background-color: #1a1a1a;
+  }
+}

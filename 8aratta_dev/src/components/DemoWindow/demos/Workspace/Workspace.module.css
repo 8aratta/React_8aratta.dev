@@ -1,0 +1,85 @@
+/* ── Base container ── */
+.workspacePage {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+  background: #0a0a0a;
+  color: #e0e0e0;
+  transition: background 0.6s ease, color 0.6s ease;
+}
+
+.workspacePage[data-theme="light"] {
+  background: #e8e8e8;
+  color: #1a1a1a;
+}
+
+/* ── Canvas wrapper ── */
+.canvasWrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Loading overlay ── */
+.loader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  z-index: 10;
+  background: inherit;
+}
+
+.loaderText {
+  font-size: 1.1rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.progressBar {
+  width: 200px;
+  height: 3px;
+  background: rgba(128, 128, 128, 0.3);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: currentColor;
+  opacity: 0.6;
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+/* ── Info overlay ── */
+.infoOverlay {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0;
+  animation: fadeIn 1s ease 0.5s forwards;
+}
+
+.infoText {
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}

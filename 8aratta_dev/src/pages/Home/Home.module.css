@@ -1,0 +1,312 @@
+@font-face {
+  font-family: 'Daydream';
+  src: url(../../../public/assets/fonts/Daydream.otf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Animations */
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInAndRotate {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  30% {
+    opacity: 0;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+    opacity: 0.5;
+  }
+}
+
+.container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  user-select: none;
+}
+
+.heroImageContainer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+.ensoBackground {
+  position: absolute;
+  top: 20%;
+  /* y-anchor */
+  left: 30%;
+  /* x-anchor */
+  width: 65vw;
+  height: auto;
+  z-index: 0;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  transform: translate(-50%, -50%) rotate(360deg);
+  pointer-events: none;
+  animation: none;
+}
+
+.container[data-animate="true"] .ensoBackground {
+  animation: slideInAndRotate 5s ease-out forwards;
+}
+
+.container[data-animate="true"] .heroImageContainer:hover .ensoBackground {
+  animation: slideInAndRotate 5s ease-out forwards, continuousRotate 10s linear infinite;
+}
+
+@keyframes continuousRotate {
+  from {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(720deg);
+  }
+}
+
+.heroImage {
+  position: relative;
+  max-height: 90vh;
+  display: block;
+  animation: none;
+  transition: transform 0.6s ease-out;
+  -webkit-user-drag: none;
+}
+
+.container[data-animate="true"] .heroImage {
+  animation: slideInFromLeft 1.5s ease-out;
+}
+
+.heroImageContainer:hover .heroImage {
+  transform: scale(1.03);
+}
+
+.heroText {
+  position: absolute;
+  right: 10%;
+  bottom: 10vh;
+  z-index: 2;
+  text-align: right;
+}
+
+.heroName {
+  font-family: 'Daydream', sans-serif;
+  font-size: clamp(4rem, 5vw, 5rem);
+  line-height: 1.2;
+  color: #ffffff90;
+  mix-blend-mode: difference;
+  margin: 0;
+  animation: none;
+  opacity: 0;
+}
+
+.container[data-animate="true"] .heroName {
+  animation: fadeInUp 1.5s ease-out 0.3s both;
+}
+
+.container[data-theme="light"] .heroName {
+  color: #00000090;
+}
+
+.heroDescription {
+  position: relative;
+  display: inline-block;
+  font-family: 'Daydream', sans-serif;
+  font-size: clamp(1rem, 1.5vw, 1rem);
+  line-height: 1.2;
+  color: #ffffff90;
+  mix-blend-mode: difference;
+  font-weight: 300;
+  margin: 0.5rem 0 0 0;
+  padding: 1rem;
+  animation: none;
+  opacity: 0;
+}
+
+.container[data-animate="true"] .heroDescription {
+  animation: fadeInUp 1.5s ease-out 0.6s both;
+}
+
+.container[data-theme="light"] .heroDescription {
+  color: #00000090;
+}
+
+.heroDescription::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 30%;
+  border-top: 2px solid #ffffff90;
+  border-left: 2px solid #ffffff90;
+  mix-blend-mode: difference;
+}
+
+.container[data-theme="light"] .heroDescription::before {
+  border-top-color: #00000090;
+  border-left-color: #00000090;
+}
+
+.heroDescription::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 40%;
+  height: 30%;
+  border-bottom: 2px solid #ffffff90;
+  border-right: 2px solid #ffffff90;
+  mix-blend-mode: difference;
+}
+
+.container[data-theme="light"] .heroDescription::after {
+  border-bottom-color: #00000090;
+  border-right-color: #00000090;
+}
+
+.heroDescription span,
+.heroName>span {
+  display: block;
+}
+
+.spacedT {
+  display: inline;
+  margin-left: 0.05em;
+}
+
+.content {
+  position: relative;
+  z-index: 3;
+  padding: 20px;
+  pointer-events: auto;
+}
+
+/* Tablet styles */
+@media (max-width: 1024px) {
+  .ensoBackground {
+    width: 85vw;
+  }
+
+  .heroText {
+    right: 5%;
+    bottom: 8vh;
+  }
+
+  .heroName {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+  }
+
+  .heroDescription {
+    font-size: clamp(1.2rem, 2.5vw, 2rem);
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .ensoBackground {
+    width: 90vw;
+    opacity: 0.2;
+  }
+
+  .heroImageContainer {
+    max-height: 70vh;
+  }
+
+  .heroImage {
+    max-height: 100%;
+  }
+
+  .heroText {
+    right: auto;
+    right: 0%;
+    bottom: 10vh;
+    text-align: left;
+    color: #fff;
+    rotate: 270deg;
+  }
+
+  .heroName {
+    font-size: clamp(1.7rem, 7vw, 2.5rem);
+    color: #fff;
+  }
+
+  .container[data-theme="light"] .heroName {
+    color: #000;
+  }
+
+  .heroDescription {
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    color: #fff;
+  }
+
+  .container[data-theme="light"] .heroDescription {
+    color: #000;
+  }
+}
+
+/* Small mobile styles */
+@media (max-width: 480px) {
+  .heroImageContainer {
+    max-height: 60vh;
+  }
+
+  .heroImage {
+    max-height: 100%;
+  }
+
+  .heroText {
+    bottom: 10vh;
+    color: #fff;
+  }
+
+  .heroName {
+    font-size: clamp(1rem, 7vw, 2rem);
+    color: #fff;
+  }
+
+  .container[data-theme="light"] .heroName {
+    color: #000;
+  }
+
+  .heroDescription {
+    font-size: clamp(0.9rem, 4vw, 1.2rem);
+    color: #fff;
+  }
+
+  .container[data-theme="light"] .heroDescription {
+    color: #000;
+  }
+}

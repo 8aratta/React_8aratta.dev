@@ -1,0 +1,172 @@
+﻿.settingsPanel {
+  width: 200px;
+  min-width: 160px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border, #e0e0e0);
+  padding: 1rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: var(--surface-secondary, rgba(0, 0, 0, 0.03));
+}
+
+.settingsContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.mobileToggle {
+  display: none;
+}
+
+.toggleIcon {
+  width: 12px;
+  height: 12px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.settingsLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+}
+
+.settingsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border, #e0e0e0);
+  margin-bottom: 0.25rem;
+}
+
+.headerCloseBtn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  min-width: unset;
+  min-height: unset;
+  border: 1px solid var(--border, #e0e0e0);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  color: var(--text-secondary, #888);
+  padding: 0;
+  flex-shrink: 0;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.headerCloseBtn:hover {
+  background: var(--surface-secondary, rgba(0,0,0,0.06));
+  color: var(--text-primary, #111);
+  border-color: var(--text-secondary, #888);
+}
+
+.settingsBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.controlRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.controlLabel {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.controlRow select,
+.controlRow input[type='number'],
+.controlRow input[type='range'] {
+  width: 100%;
+  padding: 0.3rem 0.4rem;
+  border: 1px solid var(--input-border, #ccc);
+  border-radius: 6px;
+  background: var(--input-bg, var(--surface));
+  color: var(--input-text, var(--text-primary));
+  font-size: 0.85rem;
+}
+
+/* Variables are inherited from the parent .demoWindow[data-theme] scope */
+
+@media (max-width: 600px) {
+  .settingsPanel {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 5;
+    width: 0;
+    min-width: unset;
+    padding: 0;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--surface, #fff);
+    transition: width 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .settingsPanelOpen {
+    width: 100%;
+  }
+
+  .mobileToggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    z-index: 6;
+    width: 30px;
+    height: 30px;
+    min-width: unset;
+    min-height: unset;
+    border: 1px solid var(--border, #e0e0e0);
+    border-radius: 50%;
+    background: var(--surface, #fff);
+    cursor: pointer;
+    color: var(--text-secondary, #888);
+    padding: 0;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .mobileToggle:hover {
+    background: var(--surface-secondary, rgba(0,0,0,0.06));
+    color: var(--text-primary, #111);
+    border-color: var(--text-secondary, #888);
+  }
+
+  .headerCloseBtn {
+    display: flex;
+  }
+
+  .settingsContent {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem 0.75rem;
+    overflow-y: auto;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+    min-width: 160px;
+  }
+
+  .settingsPanelOpen .settingsContent {
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 0.2s ease 0.2s;
+  }
+}
