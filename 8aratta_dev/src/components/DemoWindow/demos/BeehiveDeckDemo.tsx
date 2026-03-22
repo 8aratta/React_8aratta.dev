@@ -1,4 +1,5 @@
-﻿import React, { useState } from 'react';
+// This file may have had a BOM that is now removed
+import React, { useState } from 'react';
 import { BeehiveDeck } from '@8aratta/beehive-deck';
 import { DemoWindowSettings } from '../DemoWindowSettings';
 import styles from '../DemoWindowSettings.module.css';

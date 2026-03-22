@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import styles from './DemoWindowSettings.module.css';
 
 interface DemoWindowSettingsProps {

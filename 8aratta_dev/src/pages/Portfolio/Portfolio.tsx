@@ -29,7 +29,7 @@ function Portfolio() {
             <img
               className={styles.heroPhoto}
               src="/assets/images/Me.png"
-              alt="Profile photo of Domenico Baratta"
+              alt="Domenico Baratta"
               loading="lazy"
             />
           </ScrollReveal>

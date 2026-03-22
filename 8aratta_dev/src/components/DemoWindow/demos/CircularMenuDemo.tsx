@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CircularMenu } from '@8aratta/circular-menu';
 import { DemoWindowSettings } from '../DemoWindowSettings';
 import styles from '../DemoWindowSettings.module.css';
