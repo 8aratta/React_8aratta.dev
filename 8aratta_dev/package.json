@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://8aratta.dev",
   "dependencies": {
-    "@8aratta/beehive-deck": "file:../../../beehive-deck/8aratta-beehive-deck-0.0.1.tgz",
+    "@8aratta/beehive-deck": "^1.0.0",
     "@8aratta/circular-menu": "^1.0.1",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",
